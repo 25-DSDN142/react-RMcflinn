@@ -1,6 +1,7 @@
 here are helpful variables for hands and faces 
 Hands:
 
+mcp is main control point 
 
 ```javascript
 let handedness = hand.handedness; // "Left" or "Right"

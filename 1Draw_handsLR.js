@@ -21,7 +21,13 @@ function drawInteraction(faces, hands) {
     let middleFingerMcpY = hand.middle_finger_mcp.y;
     /*
     Start drawing on the hands here
+
+
+
+
     */
+
+
 
     let whatGesture = detectHandGesture(hand)
 
@@ -40,6 +46,14 @@ function drawInteraction(faces, hands) {
     if (hand.handedness === "Left") {
      ellipse(middleFingerMcpX, middleFingerMcpY, 100)
     }
+    
+
+    
+
+
+
+
+
     /*
     Stop drawing on the hands here
     */

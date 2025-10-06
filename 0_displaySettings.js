@@ -37,7 +37,7 @@ const  CaptureHeight = 720;
 // const  CaptureHeight = 768;
 
 
-
+//press k 
 // program Mode
 const webCam = false; // set to false to use video
 const videoFile = "hands1.mov" // update this to match the video file you want to load

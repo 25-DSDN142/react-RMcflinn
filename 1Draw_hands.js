@@ -15,8 +15,13 @@ function drawInteraction(faces, hands) {
     }
 
     // This is how to load in the x and y of a point on the hand.
+    let middleFingerTipX = hand.middle_finger_tip.x;
+    let middleFingerTipY = hand.middle_finger_tip.y;
     let indexFingerTipX = hand.index_finger_tip.x;
     let indexFingerTipY = hand.index_finger_tip.y;
+    let handedness = hand.handedness;
+
+
 
     //  let pinkyFingerTipX = hand.pinky_finger_tip.x;
     //  let pinkyFingerTipY = hand.pinky_finger_tip.y;
@@ -25,11 +30,17 @@ function drawInteraction(faces, hands) {
     Start drawing on the hands here
     */
 
-    fill(225, 225, 0);
-    ellipse(indexFingerTipX, indexFingerTipY, 30, 30);
+    fill(225,30, 0);
+    //ellipse(middleFingerTipX, middleFingerTipY, 30, 30);
+    //ellipse(indexFingerTipX, indexFingerTipY, 30, 30);
+
+    
+     chameleonHandPuppet(hand)
+
 
     // drawPoints(hand)
-
+    //dist = distance. how many pixels from this point to another point e.g.
+    //let sizeOfElipse = dist(x, y, wx, wy)
     //fingerPuppet(indexFingerTipX, indexFingerTipY);
 
     //chameleonHandPuppet(hand)
