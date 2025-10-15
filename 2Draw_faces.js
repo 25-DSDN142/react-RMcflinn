@@ -44,13 +44,54 @@ let leftInnerY = leftEyeCenterY;
 let leftOuterX = leftEyeCenterX + leftEyeWidth /2;
 let leftOuterY = leftEyeCenterY;  
 
+
 fill(115, 82, 53, 150);
+stroke(0, 0, 0, 50);
+strokeWeight(2);
 arc(
   leftEyeCenterX, leftEyeCenterY-3, 
   leftEyeWidth * 1.2, leftEyeHeight * 3.5,              
   0.1, PI-0.1,                                         
 );
   
+fill(115, 82, 53, 150);
+arc(
+  rightEyeCenterX, rightEyeCenterY-3, 
+  rightEyeWidth * 1.2, rightEyeHeight * 3.5,              
+  0.1, PI-0.1,                                         
+);
+
+//the creases
+//left
+noFill();
+stroke(0, 0, 0, 70);
+arc(
+  leftEyeCenterX, leftEyeCenterY-3, 
+  leftEyeWidth * 1.2, leftEyeHeight * 2.9,              
+  PI * 0.67, PI -0.1                                       
+);
+
+
+arc(
+  leftEyeCenterX, leftEyeCenterY -3, 
+  leftEyeWidth * 1.2, leftEyeHeight * 2.5,              
+  PI * 0.25, PI-0.1                                         
+);
+
+
+//right
+arc(
+  rightEyeCenterX, rightEyeCenterY -3, 
+  rightEyeWidth * 1.2, rightEyeHeight * 2.9,              
+  0.1, PI -2,                                         
+);
+
+arc(
+  rightEyeCenterX, rightEyeCenterY -3, 
+  rightEyeWidth * 1.2, rightEyeHeight * 2.5,              
+  0.1, PI -0.75,                                         
+);
+
 
 // EYES --------------------------------------------------------
 
