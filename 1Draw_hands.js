@@ -30,12 +30,12 @@ function drawInteraction(faces, hands) {
     Start drawing on the hands here
     */
 
-    fill(225,30, 0);
+    //fill(225,30, 0);
     //ellipse(middleFingerTipX, middleFingerTipY, 30, 30);
     //ellipse(indexFingerTipX, indexFingerTipY, 30, 30);
 
     
-     chameleonHandPuppet(hand)
+     
 
 
     // drawPoints(hand)

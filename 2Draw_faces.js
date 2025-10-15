@@ -8,83 +8,96 @@ function drawInteraction(faces, hands) {
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
   for (let i = 0; i < faces.length; i++) {
-    let face = faces[i]; // face holds all the keypoints of the face\
+   for (let i = 0; i < faces.length; i++) {
+    let face = faces[i]; // face holds all the keypoints of the face
     console.log(face);
     if (showKeypoints) {
-      drawPoints(face)
+      drawPoints(face);
     }
 
-    /*
-    Once this program has a face, it knows some things about it.
-    This includes how to draw a box around the face, and an oval. 
-    It also knows where the key points of the following parts are:
-     face.leftEye
-     face.leftEyebrow
-     face.lips
-     face.rightEye
-     face.rightEyebrow
-    */
-    // Here are some variables you may like to use. 
-    // Face basics
-    let faceCenterX = face.faceOval.centerX;
-    let faceCenterY = face.faceOval.centerY;
-    let faceWidth = face.faceOval.width;
-    let faceheight = face.faceOval.height;
-    // Left eye
-    let leftEyeCenterX = face.leftEye.centerX;
-    let leftEyeCenterY = face.leftEye.centerY;
-    let leftEyeWidth = face.leftEye.width;
-    let leftEyeHeight = face.leftEye.height;
-    // Left eyebrow
-    let leftEyebrowCenterX = face.leftEyebrow.centerX;
-    let leftEyebrowCenterY = face.leftEyebrow.centerY;
-    let leftEyebrowWidth = face.leftEyebrow.width;
-    let leftEyebrowHeight = face.leftEyebrow.height;
+//variables to use 
+// Face basics
+let faceCenterX = face.faceOval.centerX;
+let faceCenterY = face.faceOval.centerY;
+let faceWidth = face.faceOval.width;
+let faceHeight = face.faceOval.height;
+// Left eye
+let leftEyeCenterX = face.leftEye.centerX;
+let leftEyeCenterY = face.leftEye.centerY;
+let leftEyeWidth = face.leftEye.width;
+let leftEyeHeight = face.leftEye.height;
+// Right eye
+let rightEyeCenterX = face.rightEye.centerX;
+let rightEyeCenterY = face.rightEye.centerY;
+let rightEyeWidth = face.rightEye.width;
+let rightEyeHeight = face.rightEye.height;
+// Nose tip
+let noseTipX = face.keypoints[4].x;
+let noseTipY = face.keypoints[4].y;
+//My Variables ---------------------------
+// Left eye
+let leftInnerX = leftEyeCenterX + leftEyeWidth * 0.43;
+let leftInnerY = leftEyeCenterY;
+let leftOuterX = leftEyeCenterX - leftEyeWidth * 0.43;
+let leftOuterY = leftEyeCenterY;
+let leftTopX = leftEyeCenterX;
+let leftTopY = leftEyeCenterY - leftEyeHeight * 0.63;
+let leftBottomX = leftEyeCenterX;
+let leftBottomY = leftEyeCenterY + leftEyeHeight * 0.43;
 
-    // Lips
-    let lipsCenterX = face.lips.centerX;
-    let lipsCenterY = face.lips.centerY;
-    let lipsWidth = face.lips.width;
-    let lipsHeight = face.lips.height;
+// Right eye 
+let rightInnerX = rightEyeCenterX - rightEyeWidth * 0.4;
+let rightInnerY = rightEyeCenterY;
+let rightOuterX = rightEyeCenterX + rightEyeWidth * 0.4;
+let rightOuterY = rightEyeCenterY;
+let rightTopX = rightEyeCenterX;
+let rightTopY = rightEyeCenterY - rightEyeHeight * 0.6;
+let rightBottomX = rightEyeCenterX;
+let rightBottomY = rightEyeCenterY + rightEyeHeight * 0.4;
+// FACE --------------------------------------------------------
 
-    // Right eye
-    let rightEyeCenterX = face.rightEye.centerX;
-    let rightEyeCenterY = face.rightEye.centerY;
-    let rightEyeWidth = face.rightEye.width;
-    let rightEyeHeight = face.rightEye.height;
+beginShape();
+vertex(leftInnerX, leftInnerY); //inner corner
 
-    // Right eyebrow
-    let rightEyebrowCenterX = face.rightEyebrow.centerX;
-    let rightEyebrowCenterY = face.rightEyebrow.centerY;
-    let rightEyebrowWidth = face.rightEyebrow.width;
-    let rightEyebrowHeight = face.rightEyebrow.height;
+// Upper curve
+bezierVertex(
+  leftInnerX * 0.8 + leftTopX * 0.2, leftTopY - 3,  // Control 1
+  leftTopX - 1.5, leftTopY,                               // Anchor top
+  leftTopX * 0.7 + leftOuterX * 0.3, leftTopY + 3   // Control 2
+);
 
-    let noseTipX = face.keypoints[4].x;
-    let noseTipY = face.keypoints[4].y;
-    /*
-    Start drawing on the face here
-    */
-    noStroke()
-    fill(225, 225, 0);
-    // fill(get(leftEyeCenterX, leftEyeCenterY))
+vertex(leftOuterX, leftOuterY); // Outer corner
 
-    ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight);
+// Lower curve  
+bezierVertex(
+  leftOuterX * 0.8 + leftBottomX * 0.2, leftBottomY + 3, 
+  leftBottomX, leftBottomY,                               
+  leftBottomX * 0.7 + leftInnerX * 0.3, leftBottomY + 2   
+);
 
-    drawPoints(face.leftEye);
-    drawPoints(face.leftEyebrow);
-    drawPoints(face.lips);
-    drawPoints(face.rightEye);
-    drawPoints(face.rightEyebrow);
-
-    // drawX(rightEyeCenterX,rightEyeCenterY);
-    // drawX(leftEyeCenterX,leftEyeCenterY);
+vertex(leftInnerX, leftInnerY); 
+endShape(CLOSE);
 
 
-    // drawX(noseTipX,noseTipY); 
 
-    // drawX(face.keypoints[332].x,face.keypoints[332].y);
-    // drawX(face.keypoints[103].x,face.keypoints[103].y);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  } }
 
     /*
     Stop drawing on the face here
@@ -93,7 +106,7 @@ function drawInteraction(faces, hands) {
   }
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
-}
+
 
 function drawX(X, Y) {
   push()
