@@ -21,6 +21,19 @@ let faceCenterX = face.faceOval.centerX;
 let faceCenterY = face.faceOval.centerY;
 let faceWidth = face.faceOval.width;
 let faceHeight = face.faceOval.height;
+
+ // Right eyebrow
+let rightEyebrowCenterX = face.rightEyebrow.centerX;
+let rightEyebrowCenterY = face.rightEyebrow.centerY;
+let rightEyebrowWidth = face.rightEyebrow.width;
+let rightEyebrowHeight = face.rightEyebrow.height;
+
+// Left eyebrow
+let leftEyebrowCenterX = face.leftEyebrow.centerX;
+let leftEyebrowCenterY = face.leftEyebrow.centerY;
+let leftEyebrowWidth = face.leftEyebrow.width;
+let leftEyebrowHeight = face.leftEyebrow.height;
+
 // Left eye
 let leftEyeCenterX = face.leftEye.centerX;
 let leftEyeCenterY = face.leftEye.centerY;
@@ -125,14 +138,47 @@ arc(
   0.1, PI-0.1                                                  
 );
 
+//highlights
 fill(255, 255, 255, 180);
 ellipse(rightEyeCenterX -4, rightEyeCenterY -6, 2, 2);
 ellipse(leftEyeCenterX -4, leftEyeCenterY -6, 2, 2);
 
+//EYEBROWS ----------------------------------------------------
+
+let rightEyebrowBottomX = rightEyebrowCenterX - rightEyebrowWidth/2;
+let rightEyebrowBottomY = rightEyebrowCenterY + rightEyebrowHeight/2;
+let rightEyebrowTopX = rightEyebrowCenterX + rightEyebrowWidth/2;
+let rightEyebrowTopY = rightEyebrowCenterY - rightEyebrowHeight/2;
+
+let leftEyebrowBottomX = leftEyebrowCenterX + leftEyebrowWidth/2;  // Flipped X
+let leftEyebrowBottomY = leftEyebrowCenterY + leftEyebrowHeight/2;
+let leftEyebrowTopX = leftEyebrowCenterX - leftEyebrowWidth/2;      // Flipped X
+let leftEyebrowTopY = leftEyebrowCenterY - leftEyebrowHeight/2;
+
+
+//main lines 
+strokeWeight(10);
+stroke(1);
+noFill();
+strokeCap(SQUARE);  
+
+
+arc(
+rightEyebrowTopX + 10, rightEyebrowTopY +10,
+rightEyebrowWidth *2.2, rightEyebrowHeight *2 ,
+PI+ 0.07, TWO_PI - 2.2, 
+);
 
 
 
 
+arc(
+leftEyebrowTopX - 10, leftEyebrowTopY + 10,
+leftEyebrowWidth *2.2, leftEyebrowHeight *2 ,
+ PI + 2.2, TWO_PI - 0.1
+);
+
+  
 
 
 
