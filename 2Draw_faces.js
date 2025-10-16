@@ -48,6 +48,12 @@ let rightEyeHeight = face.rightEye.height;
 let noseTipX = face.keypoints[4].x;
 let noseTipY = face.keypoints[4].y;
 
+// Lips
+let lipsCenterX = face.lips.centerX;
+let lipsCenterY = face.lips.centerY;
+let lipsWidth = face.lips.width;
+let lipsHeight = face.lips.height;
+
 //EYE BAGS ----------------------------------------------------------------
 
 
@@ -112,30 +118,30 @@ arc(
 fill(0);
 noStroke();
 arc(
-  leftEyeCenterX, leftEyeCenterY+3, 
+  leftEyeCenterX, leftEyeCenterY+2, 
   leftEyeWidth * 1.2, leftEyeHeight * 2.5,              
-  PI+0.1, TWO_PI-0.1                                           
+  PI+0.05, TWO_PI-0.05                                           
 );
 
 // bottom left eye 
 arc(
-  leftEyeCenterX, leftEyeCenterY-3, 
+  leftEyeCenterX, leftEyeCenterY-2, 
   leftEyeWidth * 1.2, leftEyeHeight * 2,             
-  0.1, PI-0.1                                                  
+  0.05, PI-0.05                                                 
 );
 
 //top right eye
 arc(
-  rightEyeCenterX, rightEyeCenterY+3, 
+  rightEyeCenterX, rightEyeCenterY+2, 
   rightEyeWidth * 1.2, rightEyeHeight * 2.5,              
-  PI+0.1, TWO_PI-0.1                                           
+  PI+0.05, TWO_PI-0.05                                           
 );
 
 // bottom right eye
 arc(
-  rightEyeCenterX, rightEyeCenterY-3, 
+  rightEyeCenterX, rightEyeCenterY-2, 
   rightEyeWidth * 1.2, rightEyeHeight * 2,             
-  0.1, PI-0.1                                                  
+  0.05, PI-0.05                                                 
 );
 
 //highlights
@@ -145,40 +151,136 @@ ellipse(leftEyeCenterX -4, leftEyeCenterY -6, 2, 2);
 
 //EYEBROWS ----------------------------------------------------
 
-let rightEyebrowBottomX = rightEyebrowCenterX - rightEyebrowWidth/2;
-let rightEyebrowBottomY = rightEyebrowCenterY + rightEyebrowHeight/2;
 let rightEyebrowTopX = rightEyebrowCenterX + rightEyebrowWidth/2;
 let rightEyebrowTopY = rightEyebrowCenterY - rightEyebrowHeight/2;
 
-let leftEyebrowBottomX = leftEyebrowCenterX + leftEyebrowWidth/2;  // Flipped X
-let leftEyebrowBottomY = leftEyebrowCenterY + leftEyebrowHeight/2;
 let leftEyebrowTopX = leftEyebrowCenterX - leftEyebrowWidth/2;      // Flipped X
 let leftEyebrowTopY = leftEyebrowCenterY - leftEyebrowHeight/2;
 
 
-//main lines 
-strokeWeight(10);
+strokeWeight(11);
 stroke(1);
 noFill();
-strokeCap(SQUARE);  
-
-
+strokeCap(PROJECT);  
+//right eyebrow
 arc(
 rightEyebrowTopX + 10, rightEyebrowTopY +10,
 rightEyebrowWidth *2.2, rightEyebrowHeight *2 ,
 PI+ 0.07, TWO_PI - 2.2, 
 );
 
-
-
-
+//left eyebrow
 arc(
 leftEyebrowTopX - 10, leftEyebrowTopY + 10,
 leftEyebrowWidth *2.2, leftEyebrowHeight *2 ,
  PI + 2.2, TWO_PI - 0.1
 );
 
+stroke(250)
+strokeWeight(3);
+line(rightEyebrowTopX-10, rightEyebrowTopY - 5, rightEyebrowTopX-10, rightEyebrowTopY- 10);
+line(rightEyebrowTopX-5, rightEyebrowTopY - 5, rightEyebrowTopX-5, rightEyebrowTopY- 10);
+
+line(leftEyebrowTopX+10, leftEyebrowTopY - 5, leftEyebrowTopX+10, leftEyebrowTopY- 10);
+line(leftEyebrowTopX+5, leftEyebrowTopY - 5, leftEyebrowTopX+5, leftEyebrowTopY- 10);
+//NOSE -----------------------------------------------------------------
+
+//nose base
+stroke(1, 20);
+strokeWeight(2);
+strokeCap(SQUARE)
+fill(115, 82, 53, 150)
+rect(noseTipX - 30, noseTipY+3, 60, 12, 3, 3, 30, 30);
+
+//nose bridge and contourrrr
+stroke(1, 70)
+strokeWeight(3)
+line(noseTipX - 30, noseTipY+5, noseTipX, noseTipY+ 1.5);
+line(noseTipX + 30, noseTipY+5, noseTipX, noseTipY+ 1.5);
+line(noseTipX - 7, noseTipY+15, noseTipX + 7, noseTipY+ 15);
+
+//nostrils
+fill(1, 150);
+noStroke();
+ellipse(noseTipX - 12, noseTipY+13, 12, 7);
+ellipse(noseTipX + 12, noseTipY+13, 12, 7);
+
+
+
+
+
+
+//MOUTH------------------------------------------------------
+let topLipsCenterX = face.keypoints[11].x;
+let topLipsCenterY = face.keypoints[11].y;
+let bottomLipCenterY = face.keypoints[15].y;
+let bottomLipCenterX = face.keypoints[15].x;
+
+let mouthOpenness = abs(bottomLipCenterY - topLipsCenterY);
+let mouthOpenThreshold = 15;
+let isMouthOpen = mouthOpenness > mouthOpenThreshold;
+
+
+stroke(0);
+noFill()
+strokeWeight(4);
+arc(topLipsCenterX, topLipsCenterY + 5,
+    lipsWidth * 1.2, lipsHeight * 0.3,  
+    PI, TWO_PI
+);
+
+
+if (isMouthOpen) {  
+    arc(bottomLipCenterX, bottomLipCenterY,
+       lipsWidth *0.5, lipsHeight *0.1,
+        0, PI);
   
+strokeWeight(1);
+fill(237, 233, 185);
+    rect(bottomLipCenterX, bottomLipCenterY -8, 11, 11, 0, 0, 10, 3);
+    rect(bottomLipCenterX-10, bottomLipCenterY -8, 11, 10, 0, 0, 3, 10);
+
+    rect(topLipsCenterX+ 10, topLipsCenterY, 11, 11, 10, 10, 3, 3);
+    rect(topLipsCenterX- 25, topLipsCenterY, 11, 11, 10, 3, 3, 3);
+}   
+strokeWeight(1);
+fill(237, 233, 185);
+rect(topLipsCenterX-15, topLipsCenterY, 11, 11, 3, 10, 3, 3);
+    
+//creases
+
+strokeWeight(1);
+line(noseTipX - 30, noseTipY + 25, topLipsCenterX - 40, topLipsCenterY - 10);
+line(noseTipX - 25, noseTipY + 27, topLipsCenterX - 30, topLipsCenterY - 12);
+line(noseTipX - 20, noseTipY + 27, topLipsCenterX - 20, topLipsCenterY - 15);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
