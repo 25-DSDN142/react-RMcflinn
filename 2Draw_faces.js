@@ -1,19 +1,21 @@
 // ----=  Faces  =----
 /* load images here */
+let hatImage;
 function prepareInteraction() {
-  //bgImage = loadImage('/images/background.png');
+  hatImage = loadImage('images/2D_hat.png');
 }
 
 function drawInteraction(faces, hands) {
 
+  image(hatImage, 200, 200)
+
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
-  for (let i = 0; i < faces.length; i++) {
    for (let i = 0; i < faces.length; i++) {
     let face = faces[i]; // face holds all the keypoints of the face
     console.log(face);
     if (showKeypoints) {
       drawPoints(face);
-    }
+    
 
 //variables to use 
 // Face basics
@@ -73,7 +75,6 @@ arc(
   0.1, PI-0.1,                                         
 );
   
-fill(115, 82, 53, 150);
 arc(
   rightEyeCenterX, rightEyeCenterY-3, 
   rightEyeWidth * 1.2, rightEyeHeight * 3.5,              
@@ -83,13 +84,13 @@ arc(
 //the creases
 //left
 noFill();
-stroke(0, 0, 0, 70);
+stroke(0,0,0,50)
 arc(
   leftEyeCenterX, leftEyeCenterY-3, 
   leftEyeWidth * 1.2, leftEyeHeight * 2.9,              
   PI * 0.67, PI -0.1                                       
 );
-
+stroke(62, 38, 79, 150)
 
 arc(
   leftEyeCenterX, leftEyeCenterY -3, 
@@ -99,11 +100,13 @@ arc(
 
 
 //right
+stroke(0,0,0,50)
 arc(
   rightEyeCenterX, rightEyeCenterY -3, 
   rightEyeWidth * 1.2, rightEyeHeight * 2.9,              
   0.1, PI -2,                                         
 );
+stroke(62, 38, 79, 150)
 
 arc(
   rightEyeCenterX, rightEyeCenterY -3, 
@@ -146,6 +149,7 @@ arc(
 
 //highlights
 fill(255, 255, 255, 180);
+
 ellipse(rightEyeCenterX -4, rightEyeCenterY -6, 2, 2);
 ellipse(leftEyeCenterX -4, leftEyeCenterY -6, 2, 2);
 
@@ -158,7 +162,7 @@ let leftEyebrowTopX = leftEyebrowCenterX - leftEyebrowWidth/2;      // Flipped X
 let leftEyebrowTopY = leftEyebrowCenterY - leftEyebrowHeight/2;
 
 
-strokeWeight(11);
+strokeWeight(12);
 stroke(1);
 noFill();
 strokeCap(PROJECT);  
@@ -229,6 +233,7 @@ arc(topLipsCenterX, topLipsCenterY + 5,
     PI, TWO_PI
 );
 
+//TEETH------------------------------------------------
 
 if (isMouthOpen) {  
     arc(bottomLipCenterX, bottomLipCenterY,
@@ -236,23 +241,83 @@ if (isMouthOpen) {
         0, PI);
   
 strokeWeight(1);
-fill(237, 233, 185);
-    rect(bottomLipCenterX, bottomLipCenterY -8, 11, 11, 0, 0, 10, 3);
-    rect(bottomLipCenterX-10, bottomLipCenterY -8, 11, 10, 0, 0, 3, 10);
+fill(255);
+    beginShape(TRIANGLES);
+    vertex(bottomLipCenterX - 15, bottomLipCenterY);
+    vertex(bottomLipCenterX, bottomLipCenterY);
+    vertex(bottomLipCenterX - 5 , bottomLipCenterY -10);
+    endShape();
 
-    rect(topLipsCenterX+ 10, topLipsCenterY, 11, 11, 10, 10, 3, 3);
-    rect(topLipsCenterX- 25, topLipsCenterY, 11, 11, 10, 3, 3, 3);
+    beginShape(TRIANGLES);
+    vertex(bottomLipCenterX - 25, bottomLipCenterY - 2);
+    vertex(bottomLipCenterX - 15, bottomLipCenterY);
+    vertex(bottomLipCenterX -20 , bottomLipCenterY -10);
+    endShape();
+
+     beginShape(TRIANGLES);
+    vertex(bottomLipCenterX, bottomLipCenterY);
+    vertex(bottomLipCenterX + 10, bottomLipCenterY);
+    vertex(bottomLipCenterX +5 , bottomLipCenterY -10);
+    endShape();
+
+     beginShape(TRIANGLES);
+    vertex(bottomLipCenterX +10, bottomLipCenterY);
+    vertex(bottomLipCenterX + 25, bottomLipCenterY -2);
+    vertex(bottomLipCenterX + 20 , bottomLipCenterY -10);
+    endShape();
+
+     beginShape(TRIANGLES)
+    vertex(topLipsCenterX+ 25, topLipsCenterY + 2)
+    vertex(topLipsCenterX + 5, topLipsCenterY)
+    vertex(topLipsCenterX +15, topLipsCenterY + 10)
+    endShape()
+
+     beginShape(TRIANGLES)
+    vertex(topLipsCenterX+ 35, topLipsCenterY + 3)
+    vertex(topLipsCenterX + 25, topLipsCenterY + 1)
+    vertex(topLipsCenterX +30, topLipsCenterY + 10)
+    endShape()
+
+     beginShape(TRIANGLES)
+    vertex(topLipsCenterX- 40, topLipsCenterY + 3)
+    vertex(topLipsCenterX - 30, topLipsCenterY + 1)
+    vertex(topLipsCenterX - 35, topLipsCenterY + 10)
+    endShape()
+
+
+
 }   
 strokeWeight(1);
 fill(237, 233, 185);
-rect(topLipsCenterX-15, topLipsCenterY, 11, 11, 3, 10, 3, 3);
+beginShape(TRIANGLES)
+vertex(topLipsCenterX-20, topLipsCenterY + 2)
+vertex(topLipsCenterX, topLipsCenterY)
+vertex(topLipsCenterX - 10, topLipsCenterY + 10)
+endShape()
     
-//creases
+
+
+
+
+//creases---------------------------------------------------------------------
+strokeCap(ROUND);
 
 strokeWeight(1);
-line(noseTipX - 30, noseTipY + 25, topLipsCenterX - 40, topLipsCenterY - 10);
-line(noseTipX - 25, noseTipY + 27, topLipsCenterX - 30, topLipsCenterY - 12);
-line(noseTipX - 20, noseTipY + 27, topLipsCenterX - 20, topLipsCenterY - 15);
+line(noseTipX - 30, noseTipY + 25, topLipsCenterX - 45, topLipsCenterY - 10);
+line(noseTipX - 25, noseTipY + 27, topLipsCenterX - 35, topLipsCenterY - 12);
+
+line(noseTipX + 30, noseTipY + 25, topLipsCenterX + 45, topLipsCenterY - 10);
+line(noseTipX + 25, noseTipY + 27, topLipsCenterX + 35, topLipsCenterY - 12);
+
+let noseCenterX = face.keypoints[8].x;
+let noseCenterY = face.keypoints[8].y;
+let noseTopX = face.keypoints[9].x;
+let noseTopY = face.keypoints[9].y;
+
+line(noseTopX, noseTopY - 3, noseCenterX, noseCenterY);
+line(noseTopX + 6, noseTopY, noseCenterX + 4, noseCenterY - 2);
+line(noseTopX - 6, noseTopY, noseCenterX -4, noseCenterY - 2);
+
 
 
 

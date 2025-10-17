@@ -9,6 +9,7 @@ function prepareInteraction() {
   halo = loadImage('/images/Gemini_halo.png');
   rightHorn = loadImage('/images/Gemini_horn1.png');
   leftHorn = loadImage('/images/Gemini_horn2.png');
+  hat = loadImage('C:/Users/roseb/OneDrive/Documents/DSDN/2Ds_hat.png');
 }
 
 function drawInteraction(faces, hands) {
